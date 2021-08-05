@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
         <footer className="bg-gray-100 pt-12">
-            <div className="container mx-auto p md:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+            <div className="container mx-auto px-5 md:px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
                 <div className="space-y-4 text-xs text-gray-800 mb-7">
                     <h5 className="font-bold">ABOUT</h5>
                     <p className="cursor-pointer">How Airbnb works</p>
