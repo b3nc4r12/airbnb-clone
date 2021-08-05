@@ -27,7 +27,7 @@ const Footer = () => {
                     <p className="cursor-pointer">Join Now</p>
                 </div>
                 <div className="space-y-4 text-xs text-gray-800 mb-7">
-                    <h5 className="font-bold">SUPORT</h5>
+                    <h5 className="font-bold">SUPPORT</h5>
                     <p className="cursor-pointer">Help Centre</p>
                     <p className="cursor-pointer">Trust & Safety</p>
                     <p className="cursor-pointer">Our COVID-19 Response</p>
