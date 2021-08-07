@@ -8,14 +8,14 @@ import {
     UsersIcon
 } from "@heroicons/react/solid"
 import { signOut, useSession } from "next-auth/client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
 import { DateRangePicker } from "react-date-range"
 import { DateRange } from "react-date-range"
 import { useRouter } from "next/dist/client/router"
 
-const Header = ({ placeholder }) => {
+const Header = ({ placeholder, page }) => {
     const [session] = useSession();
     const router = useRouter();
 
@@ -54,10 +54,24 @@ const Header = ({ placeholder }) => {
     }
 
     const [searchStatus, setSearchStatus] = useState(false);
+    const [scroll, setScroll] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollY > 20) {
+                setScroll(true);
+            } else {
+                setScroll(false);
+            }
+        }
+
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [])
 
     return (
         <header className="sticky top-0 z-50">
-            <div className={!searchStatus ? `grid grid-cols-2 sm:grid-cols-3 md:px-10 bg-transparent p-5 ${searchInput && "-mb-90"}` : `flex ${searchInput && "flex-col -mb-90"} bg-transparent p-5`}>
+            <div className={!searchStatus ? `grid grid-cols-2 sm:grid-cols-3 md:px-10 transition duration-300 ease-in-out bg-white shadow-md ${!scroll && `${page == "Home" ? "bg-transparent shadow-none" : "bg-white"}`} p-5 ${searchInput && "-mb-90"}` : `flex transition duration-300 ease-in-out bg-white ${searchInput && "flex-col -mb-90"} shadow-md ${!scroll && `${page == "Home" ? "bg-transparent shadow-none" : "bg-white"}`} p-5`}>
                 {/* Left - Airbnb Logo */}
                 <div
                     onClick={() => router.push("/")}
@@ -84,7 +98,7 @@ const Header = ({ placeholder }) => {
                 </div>
 
                 {/* Right - Icons */}
-                <div className="flex items-center justify-end space-x-4 text-white">
+                <div className={`flex items-center justify-end space-x-4 transition duration-200 ease-in-out ${!scroll && `${page == "Home" ? "text-white" : "text-gray-600"}`}`}>
                     {searchStatus ?
                         <XIcon onClick={() => setSearchStatus(false)} className={`h-7 ml-5 cursor-pointer ${searchInput && "hidden"}`} />
                         :

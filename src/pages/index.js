@@ -9,7 +9,7 @@ import { getSession } from "next-auth/client"
 import Login from "../components/Login"
 import Fade from "react-reveal/Fade"
 
-export default function Home({ exploreData, cardsData, session }) {
+export const Home = ({ exploreData, cardsData, session }) => {
   if (!session) return <Login />
 
   return (
@@ -19,7 +19,7 @@ export default function Home({ exploreData, cardsData, session }) {
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header page="Home" />
       <Banner />
 
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
@@ -99,3 +99,5 @@ export async function getServerSideProps(context) {
     }
   }
 }
+
+export default Home

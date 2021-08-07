@@ -6,6 +6,7 @@ import Login from "../components/Login"
 import { useRouter } from "next/dist/client/router"
 import { format } from "date-fns"
 import InfoCard from "../components/InfoCard"
+import Map from "../components/Map"
 
 const Search = ({ session, londonResults, monctonResults, halifaxResults, newYorkResults }) => {
     if (!session) return <Login />
@@ -40,12 +41,13 @@ const Search = ({ session, londonResults, monctonResults, halifaxResults, newYor
         <>
             <Head>
                 <title>Stays in {location}</title>
+                <link rel="shortcut icon" href="/favicon.ico" />
             </Head>
 
             <Header placeholder={`${location} | ${range} | ${noOfGuests} ${noOfGuests == 1 ? "guest" : "guests"}`} />
 
             <main className="flex bg-gray-100">
-                <section className="flex-grow">
+                <section className="flex-grow overflow-scroll scrollbar-hide">
                     <div className="px-6 border-b pt-14 shadow-md bg-white">
                         <p className="text-xs">300+ Stays - {range} - {noOfGuests} {noOfGuests == 1 ? "guest" : "guests"}</p>
                         <h1 className="text-3xl font-semibold mt-2 mb-6">Stays in {location}</h1>
@@ -73,6 +75,10 @@ const Search = ({ session, londonResults, monctonResults, halifaxResults, newYor
                             />
                         ))}
                     </div>
+                </section>
+
+                <section className="hidden xl:inline-flex xl:min-w-[600px] h-full sticky top-0">
+                    <Map searchResults={searchResults} />
                 </section>
             </main>
 
