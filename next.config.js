@@ -11,6 +11,6 @@ module.exports = {
     },
     env: {
         stripe_public_key: process.env.STRIPE_PUBLIC_KEY,
-        mapbox_token: process.env.MAPBOX_TOKEN
+        mapbox_key: process.env.MAPBOX_KEY
     }
 }

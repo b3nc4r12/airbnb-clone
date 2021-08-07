@@ -77,7 +77,7 @@ const Search = ({ session, londonResults, monctonResults, halifaxResults, newYor
                     </div>
                 </section>
 
-                <section className="hidden xl:inline-flex xl:min-w-[600px] h-full sticky top-0">
+                <section className="hidden xl:inline-flex xl:min-w-[600px] h-screen sticky top-20">
                     <Map searchResults={searchResults} />
                 </section>
             </main>

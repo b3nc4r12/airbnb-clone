@@ -1,6 +1,6 @@
+import getCenter from "geolib/es/getCenter"
 import { useState } from "react"
 import ReactMapGL, { Marker } from "react-map-gl"
-import getCenter from "geolib/es/getCenter"
 
 const Map = ({ searchResults }) => {
     const coordinates = searchResults.map((result) => ({
@@ -21,15 +21,15 @@ const Map = ({ searchResults }) => {
     return (
         <ReactMapGL
             mapStyle="mapbox://styles/b3nc4r12/cks1au8v438ey17pdckf5nlaf"
-            mapboxApiAccessToken={process.env.mapbox_token}
+            mapboxApiAccessToken={process.env.mapbox_key}
             {...viewport}
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
         >
             {searchResults.map((result) => (
-                <div key={result.long}>
+                <div>
                     <Marker
-                        longitude={result.long}
                         latitude={result.lat}
+                        longitude={result.long}
                     >
                         <div className="bg-white rounded-2xl font-semibold py-1 px-1.5 hover:bg-black hover:text-white transition duration-150 ease-out cursor-pointer">${result.price} CAD</div>
                     </Marker>
@@ -40,3 +40,5 @@ const Map = ({ searchResults }) => {
 }
 
 export default Map
+
+// bg-white rounded-2xl font-semibold py-1 px-1.5 hover:bg-black hover:text-white transition duration-150 ease-out cursor-pointer
