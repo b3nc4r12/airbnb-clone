@@ -16,4 +16,20 @@
     .w-273 {
         width: 279px;
     }
+
+    .line-height-70 {
+        line-height: 70px;
+    }
+
+    .line-height-45 {
+        line-height: 45px;
+    }
+
+    .top-200 {
+        top: 300px;
+    }
+
+    .-mb-90 {
+        margin-bottom: -570px;
+    }
 }

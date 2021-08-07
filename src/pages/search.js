@@ -7,7 +7,7 @@ import { useRouter } from "next/dist/client/router"
 import { format } from "date-fns"
 import InfoCard from "../components/InfoCard"
 
-const Search = ({ session, searchResults }) => {
+const Search = ({ session, londonResults, monctonResults, halifaxResults, newYorkResults }) => {
     if (!session) return <Login />
 
     const router = useRouter();
@@ -16,7 +16,25 @@ const Search = ({ session, searchResults }) => {
 
     const formattedStartDate = format(new Date(startDate), "MMMM dd, yyyy");
     const formattedEndDate = format(new Date(endDate), "MMMM dd, yyyy");
-    const range = `${formattedStartDate} - ${formattedEndDate}`
+    const range = `${formattedStartDate} - ${formattedEndDate}`;
+
+    let searchResults = londonResults;
+
+    if (location == "Moncton" || location == "moncton") {
+        searchResults = monctonResults
+    }
+
+    if (location == "London" || location == "london") {
+        searchResults = londonResults
+    }
+
+    if (location == "Halifax" || location == "halifax") {
+        searchResults = halifaxResults
+    }
+
+    if (location == "New York" || location == "new york" || location == "New york" || location == "new York") {
+        searchResults = newYorkResults
+    }
 
     return (
         <>
@@ -41,9 +59,10 @@ const Search = ({ session, searchResults }) => {
                     </div>
 
                     <div className="flex flex-col bg-gray-100 px-6 my-5 space-y-5">
-                        {searchResults?.map(({ img, location, title, description, star, price, total }) => (
+                        {searchResults.map(({ _id, img, location, title, description, star, price, total }) => (
                             <InfoCard
-                                key={img}
+                                key={_id}
+                                id={_id}
                                 img={img}
                                 location={location}
                                 title={title}
@@ -65,12 +84,18 @@ const Search = ({ session, searchResults }) => {
 export async function getServerSideProps(context) {
     const session = await getSession(context);
 
-    const searchResults = await fetch("https://links.papareact.com/isz").then((res) => res.json());
+    const londonResults = await fetch("https://airbnb-api.vercel.app/london").then((res) => res.json());
+    const monctonResults = await fetch("https://airbnb-api.vercel.app/moncton").then((res) => res.json());
+    const halifaxResults = await fetch("https://airbnb-api.vercel.app/halifax").then((res) => res.json());
+    const newYorkResults = await fetch("https://airbnb-api.vercel.app/newyork").then((res) => res.json());
 
     return {
         props: {
             session,
-            searchResults
+            londonResults,
+            monctonResults,
+            halifaxResults,
+            newYorkResults
         }
     }
 }

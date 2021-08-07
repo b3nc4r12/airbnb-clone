@@ -42,6 +42,15 @@ export default function Home({ exploreData, cardsData, session }) {
           </section>
         </Fade>
 
+        {/* Large Card */}
+        <Fade bottom>
+          <LargeCard
+            img="https://a0.muscache.com/im/pictures/258b129d-d1cd-48b5-86d4-86206c13ebf7.jpg?im_w=1440"
+            title="Not sure where to go? Perfect."
+            buttonText="I'm flexible"
+          />
+        </Fade>
+
         {/* Medium Cards */}
         <Fade bottom>
           <section>

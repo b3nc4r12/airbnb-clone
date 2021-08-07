@@ -12,6 +12,7 @@ import { useState } from "react"
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
 import { DateRangePicker } from "react-date-range"
+import { DateRange } from "react-date-range"
 import { useRouter } from "next/dist/client/router"
 
 const Header = ({ placeholder }) => {
@@ -48,13 +49,15 @@ const Header = ({ placeholder }) => {
                 noOfGuests,
             }
         });
+
+        setSearchInput("");
     }
 
     const [searchStatus, setSearchStatus] = useState(false);
 
     return (
         <header className="sticky top-0 z-50">
-            <div className={!searchStatus ? "grid grid-cols-2 sm:grid-cols-3 md:px-10 bg-white shadow-md p-5" : "flex bg-white shadow-md p-5"}>
+            <div className={!searchStatus ? `grid grid-cols-2 sm:grid-cols-3 md:px-10 bg-transparent p-5 ${searchInput && "-mb-90"}` : `flex ${searchInput && "flex-col -mb-90"} bg-transparent p-5`}>
                 {/* Left - Airbnb Logo */}
                 <div
                     onClick={() => router.push("/")}
@@ -69,7 +72,7 @@ const Header = ({ placeholder }) => {
                 </div>
 
                 {/* Middle - Search */}
-                <div className={!searchStatus ? "hidden sm:flex items-center md:border-2 rounded-full py-2 md:shadow-sm" : "flex items-center border-2 rounded-full py-2 shadow-sm flex-grow"}>
+                <div className={!searchStatus ? "bg-white hidden sm:flex items-center md:border-2 rounded-full py-2 md:shadow-sm" : "bg-white flex items-center border-2 rounded-full py-2 shadow-sm flex-grow"}>
                     <input
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
@@ -81,15 +84,15 @@ const Header = ({ placeholder }) => {
                 </div>
 
                 {/* Right - Icons */}
-                <div className="flex items-center justify-end space-x-4 text-gray-500">
+                <div className="flex items-center justify-end space-x-4 text-white">
                     {searchStatus ?
-                        <XIcon onClick={() => setSearchStatus(false)} className="h-7 ml-5 cursor-pointer" />
+                        <XIcon onClick={() => setSearchStatus(false)} className={`h-7 ml-5 cursor-pointer ${searchInput && "hidden"}`} />
                         :
                         <>
                             <p className="hidden md:inline cursor-pointer">Become a host</p>
                             <SearchIcon onClick={() => setSearchStatus(true)} className="sm:hidden h-6 cursor-pointer" />
                             <GlobeAltIcon className="h-6 cursor-pointer" />
-                            <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
+                            <div className="flex items-center space-x-2 border-2 p-2 rounded-full bg-white text-gray-600">
                                 <MenuIcon className={`h-6 cursor-pointer ${session?.user.image && "mr-2"}`} />
                                 {session?.user.image ?
                                     <Image
@@ -108,13 +111,23 @@ const Header = ({ placeholder }) => {
                 </div>
 
                 {searchInput && (
-                    <div className="flex flex-col col-span-3 mx-auto mt-5">
-                        <DateRangePicker
-                            ranges={[selectionRange]}
-                            minDate={new Date()}
-                            rangeColors={["#fd5b61"]}
-                            onChange={handleSelect}
-                        />
+                    <div className="flex flex-col col-span-3 mx-auto mt-5 bg-white p-5 rounded-xl">
+                        <div className="hidden sm:inline-flex">
+                            <DateRangePicker
+                                ranges={[selectionRange]}
+                                minDate={new Date()}
+                                rangeColors={["#fd5b61"]}
+                                onChange={handleSelect}
+                            />
+                        </div>
+                        <div className="inline-flex sm:hidden">
+                            <DateRange
+                                ranges={[selectionRange]}
+                                minDate={new Date()}
+                                rangeColors={["#fd5b61"]}
+                                onChange={handleSelect}
+                            />
+                        </div>
                         <div className="flex items-center border-b mb-4">
                             <h2 className="text-2xl flex-grow font-semibold">Number of Guests</h2>
                             <UsersIcon className="h-5" />
