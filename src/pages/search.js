@@ -41,7 +41,7 @@ const Search = ({ session, londonResults, monctonResults, halifaxResults, newYor
         <>
             <Head>
                 <title>Stays in {location}</title>
-                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="shortcut icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico" />
             </Head>
 
             <Header placeholder={`${location} | ${range} | ${noOfGuests} ${noOfGuests == 1 ? "guest" : "guests"}`} />

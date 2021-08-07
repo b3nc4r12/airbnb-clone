@@ -6,7 +6,8 @@ module.exports = {
             "abs.twimg.com",
             "platform-lookaside.fbsbx.com",
             "avatars.githubusercontent.com",
-            "a0.muscache.com"
+            "a0.muscache.com",
+            "static.dezeen.com"
         ]
     },
     env: {

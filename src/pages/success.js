@@ -14,7 +14,7 @@ const Success = ({ session }) => {
         <div className="bg-gray-100 h-screen">
             <Head>
                 <title>Your location has been booked!</title>
-                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="shortcut icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico" />
             </Head>
 
             <Header />
