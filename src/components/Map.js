@@ -40,5 +40,3 @@ const Map = ({ searchResults }) => {
 }
 
 export default Map
-
-// bg-white rounded-2xl font-semibold py-1 px-1.5 hover:bg-black hover:text-white transition duration-150 ease-out cursor-pointer
