@@ -12,7 +12,7 @@ const Login = () => {
 
             <div className="flex flex-col items-center">
                 <Image
-                    src="/login-logo.jpg"
+                    src="C:\Users\benjc\coding\builds\airbnb-clone\src\public\login-logo.jpg"
                     height={300}
                     width={300}
                 />
